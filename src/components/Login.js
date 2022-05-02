@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import Logo from './Logo.js';
+//import Logo from './Logo.js';
 import * as mestoAuth from '../mestoAuth.js';
 ///import './styles/Login.css';
 import { CurrentUserContext } from '../contexts/CurrentUserContext'; // импортируем контекст
