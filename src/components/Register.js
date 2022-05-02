@@ -1,6 +1,6 @@
 import React, { Button } from 'react';
 import { Link } from 'react-router-dom';
-import mestoAuth from './mestoAuth'
+import mestoAuth from '../utils/mestoAuth'
 
 //import './styles/Register.css';
 

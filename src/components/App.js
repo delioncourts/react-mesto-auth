@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
-import Footer from '../Footer';
-import Header from '../Header';
-import ImagePopup from '../ImagePopup';
-import Main from '../Main';
-import PopupWithForm from '../PopupWithForm';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import EditProfilePopup from "../EditProfilePopup";
-import EditAvatarPopup from "../EditAvatarPopup";
-import AddPlacePopup from "../AddPlacePopup";
-import api from "../../utils/Api";
-
-import { Route, Switch } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
+import Footer from './Footer';
+import Header from './Header';
+import ImagePopup from './ImagePopup';
+import Main from './Main';
+import PopupWithForm from './PopupWithForm';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
+import api from "../utils/Api";
 // импортируем компоненты приложения
-import Login from '../Login.js';
-import Register from '../Register.js';
-import ProtectedRoute from '../ProtectedRoute.js';
-import InfoTooltip from '../InfoTooltip.js';
+import Login from './Login.js';
+import Register from './Register.js';
+import ProtectedRoute from './ProtectedRoute.js';
+import InfoTooltip from './InfoTooltip.js';
+import { register, authorize, getContent } from '../utils/mestoAuth';
 
 
 function App() {
