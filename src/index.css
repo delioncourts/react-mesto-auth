@@ -44,3 +44,7 @@
 @import url(./blocks/card/__container/card__container.css);
 @import url(./blocks/popup/__container-delete/popup__container-delete.css);
 @import url(./blocks/popup/__delete-submit/popup__delete-submit.css);
+@import url(./blocks/header/__info/header__info.css);
+@import url(./blocks/header/__email/header__email.css);
+@import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__link/_active/header__link_active.css);
