@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Route, Routes } from 'react-router-dom';
+import { useNavigate, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
 import ImagePopup from './ImagePopup';
@@ -185,67 +185,72 @@ function App() {
                     signOut={handleSignOut} />
 
                 <Routes>
-                    <ProtectedRoute
-                        exact path='/'
-                        loggedIn={loggedIn}
-                        component={Main}
-                        cards={cards}
-                        onEditProfile={handleEditProfileClick}
-                        onAddPlace={handleAddPlaceClick}
-                        onEditAvatar={handleEditAvatarClick}
-                        onCardClick={handleCardClick}
-                        onCardLike={handleCardLike}
-                        onCardDelete={handleCardDelete}
-                    />
-                    <Route path='/signin'>
-                        <Register
-                            isOpen={isEditProfilePopupOpen}
-                            onRegister={handleRegister}
-                            isInfoTooltipOpen={isInfoTooltipOpen}
-                        />
+                    <Route element={<ProtectedRoute loggedIn={loggedIn}></ProtectedRoute>}>
+                        <Route exact path={'/'} element={
+                            <>
+                                <Main
+                                    cards={cards}
+                                    onEditProfile={handleEditProfileClick}
+                                    onAddPlace={handleAddPlaceClick}
+                                    onEditAvatar={handleEditAvatarClick}
+                                    onCardClick={handleCardClick}
+                                    onCardLike={handleCardLike}
+                                    onCardDelete={handleCardDelete} />
+
+                                <Footer />
+
+                                <EditProfilePopup
+                                    isOpen={isEditProfilePopupOpen}
+                                    onClose={closeAllPopups}
+                                    onUpdateUser={handleUpdateUser} />
+
+                                <EditAvatarPopup
+                                    isOpen={isEditAvatarPopupOpen}
+                                    onClose={closeAllPopups}
+                                    onUpdateAvatar={handleUpdateAvatar} />
+
+                                <AddPlacePopup
+                                    isOpen={isAddPlacePopupOpen}
+                                    onClose={closeAllPopups}
+                                    onAddPlace={handleAddPlaceSubmit} />
+
+                                <PopupWithForm name="delete-confirm"
+                                    title="Вы уверены?"
+                                    button="Да"
+                                    onClose={closeAllPopups} />
+
+                                <ImagePopup name="photo"
+                                    onClose={closeAllPopups}
+                                    isOpen={isImageOpen}
+                                    card={selectedCard} />
+                            </>}></Route>
                     </Route>
-                    <Route path='/signup'>
-                        <Login
-                            isOpen={isEditProfilePopupOpen}
-                            onLogin={handleLogin}
+
+                    <Route path='/signup' element={<>
+                        <Register onRegister={handleRegister} />
+                        <InfoTooltip
+                            name='tooltip'
+                            isOpen={isInfoTooltipOpen}
+                            onClose={closeAllPopups}
+                            title={message.text}
+                            imgPath={message.imgPath}
                         />
-                    </Route>
+                    </>}></Route>
+
+                    <Route path='/signin'> element={<>
+                        <Login onLogin={handleLogin} />
+                        <InfoTooltip
+                            name='tooltip'
+                            isOpen={isInfoTooltipOpen}
+                            onClose={closeAllPopups}
+                            title={message.text}
+                            imgPath={message.imgPath}
+                        />
+                    </>}</Route>
                 </Routes>
 
-                <Footer />
-
-                <InfoTooltip
-                    name='tooltip'
-                    isOpen={isInfoTooltipOpen}
-                    onClose={closeAllPopups}
-                    title={message.text}
-                    imgPath={message.imgPath}
-                />
-
-                <EditProfilePopup
-                    isOpen={isEditProfilePopupOpen}
-                    onClose={closeAllPopups}
-                    onUpdateUser={handleUpdateUser} />
-
-                <EditAvatarPopup
-                    isOpen={isEditAvatarPopupOpen}
-                    onClose={closeAllPopups}
-                    onUpdateAvatar={handleUpdateAvatar} />
-
-                <AddPlacePopup
-                    isOpen={isAddPlacePopupOpen}
-                    onClose={closeAllPopups}
-                    onAddPlace={handleAddPlaceSubmit} />
-
-                <PopupWithForm name="delete-confirm"
-                    title="Вы уверены?"
-                    button="Да"
-                    onClose={closeAllPopups} />
-
-                <ImagePopup name="photo"
-                    onClose={closeAllPopups}
-                    isOpen={isImageOpen}
-                    card={selectedCard} />
+                <Route path={'*'} element={
+                    <Navigate replace to={loggedIn ? '/' : '/signin'} />} />
 
             </CurrentUserContext.Provider>
         </div>
