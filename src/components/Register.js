@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Auth from './Auth.js';
+import { Link } from 'react-router-dom';
 
 function Register({ onRegister }) {
   const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ function Register({ onRegister }) {
           minLength="6" maxLength="200" required />
         <span className="popup__error password-error"></span>
 
-        <button type="submit" className={"popup__save popup__save_for_entrance"}>Зарегистрироваться</button>
+        <button className={"popup__save popup__save_auth"} type="submit" >Зарегистрироваться</button>
         <p className={"popup__text"}>Уже зарегистрированы? <Link className={"popup__link"} to={'/signin'}>Войти</Link></p>
       </Auth>
     </div>

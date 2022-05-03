@@ -58,3 +58,6 @@
 @import url(./blocks/auth/__title/auth__title.css);
 @import url(./blocks/register/register.css);
 @import url(./blocks/popup/__input/_type/_auth/popup__input_type_auth.css);
+@import url(./blocks/popup/__text/popup__text.css);
+@import url(./blocks/popup/__link/popup__link.css);
+@import url(./blocks/popup/__save/_auth/popup__save_auth.css);
