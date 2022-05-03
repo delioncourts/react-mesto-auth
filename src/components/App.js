@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Route, Routes, Navigate } from 'react-router-dom';
+import { useNavigate, Route, Routes } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
 import ImagePopup from './ImagePopup';
@@ -34,13 +34,12 @@ function App() {
     const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
     const [message, setMessage] = useState(false);
     const [email, setEmail] = useState('');
-    const [userInfo, setUserInfo] = useState(null);
-
+    //const [userInfo, setUserInfo] = useState(null);
 
     useEffect(() => {
         handleTokenCheck();
         if (loggedIn) {
-            navigate('/');
+            //navigate('/');
             Promise.all([api.getInitialCards(), api.getProfile()])
                 .then(([cards, userData]) => {
                     setCurrentUser(userData);
@@ -182,7 +181,7 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
 
                 <Header
-                    email={userInfo}
+                    email={email}
                     signOut={handleSignOut} />
 
                 <Routes>
@@ -198,14 +197,14 @@ function App() {
                         onCardLike={handleCardLike}
                         onCardDelete={handleCardDelete}
                     />
-                    <Route path='/sign-in'>
+                    <Route path='/signin'>
                         <Register
                             isOpen={isEditProfilePopupOpen}
                             onRegister={handleRegister}
                             isInfoTooltipOpen={isInfoTooltipOpen}
                         />
                     </Route>
-                    <Route path='/sign-up'>
+                    <Route path='/signup'>
                         <Login
                             isOpen={isEditProfilePopupOpen}
                             onLogin={handleLogin}
@@ -214,6 +213,14 @@ function App() {
                 </Routes>
 
                 <Footer />
+
+                <InfoTooltip
+                    name='tooltip'
+                    isOpen={isInfoTooltipOpen}
+                    onClose={closeAllPopups}
+                    title={message.text}
+                    imgPath={message.imgPath}
+                />
 
                 <EditProfilePopup
                     isOpen={isEditProfilePopupOpen}
