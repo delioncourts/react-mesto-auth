@@ -7,9 +7,6 @@ function Auth({ formName, onSubmit, title, children, buttonText }) {
             <form className='auth__form' name={formName} noValidate onSubmit={onSubmit} >
                 <h2 className='auth__title'>{title}</h2>
                 {children}
-                <button type="submit" className='auth__button'>
-                    {buttonText}
-                </button>
                 {formName === 'register' &&
                     <Link className='auth__link' to='/sign-in'>Уже зарегистрированы? Войти</Link>
                 }

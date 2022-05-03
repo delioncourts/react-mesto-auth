@@ -186,44 +186,43 @@ function App() {
 
                 <Routes>
                     <Route element={<ProtectedRoute loggedIn={loggedIn}></ProtectedRoute>}>
-                        <Route exact path={'/'} element={
-                            <>
-                                <Main
-                                    cards={cards}
-                                    onEditProfile={handleEditProfileClick}
-                                    onAddPlace={handleAddPlaceClick}
-                                    onEditAvatar={handleEditAvatarClick}
-                                    onCardClick={handleCardClick}
-                                    onCardLike={handleCardLike}
-                                    onCardDelete={handleCardDelete} />
+                        <Route exact path={'/'} element={<>
+                            <Main
+                                cards={cards}
+                                onEditProfile={handleEditProfileClick}
+                                onAddPlace={handleAddPlaceClick}
+                                onEditAvatar={handleEditAvatarClick}
+                                onCardClick={handleCardClick}
+                                onCardLike={handleCardLike}
+                                onCardDelete={handleCardDelete} />
 
-                                <Footer />
+                            <Footer />
 
-                                <EditProfilePopup
-                                    isOpen={isEditProfilePopupOpen}
-                                    onClose={closeAllPopups}
-                                    onUpdateUser={handleUpdateUser} />
+                            <EditProfilePopup
+                                isOpen={isEditProfilePopupOpen}
+                                onClose={closeAllPopups}
+                                onUpdateUser={handleUpdateUser} />
 
-                                <EditAvatarPopup
-                                    isOpen={isEditAvatarPopupOpen}
-                                    onClose={closeAllPopups}
-                                    onUpdateAvatar={handleUpdateAvatar} />
+                            <EditAvatarPopup
+                                isOpen={isEditAvatarPopupOpen}
+                                onClose={closeAllPopups}
+                                onUpdateAvatar={handleUpdateAvatar} />
 
-                                <AddPlacePopup
-                                    isOpen={isAddPlacePopupOpen}
-                                    onClose={closeAllPopups}
-                                    onAddPlace={handleAddPlaceSubmit} />
+                            <AddPlacePopup
+                                isOpen={isAddPlacePopupOpen}
+                                onClose={closeAllPopups}
+                                onAddPlace={handleAddPlaceSubmit} />
 
-                                <PopupWithForm name="delete-confirm"
-                                    title="Вы уверены?"
-                                    button="Да"
-                                    onClose={closeAllPopups} />
+                            <PopupWithForm name="delete-confirm"
+                                title="Вы уверены?"
+                                button="Да"
+                                onClose={closeAllPopups} />
 
-                                <ImagePopup name="photo"
-                                    onClose={closeAllPopups}
-                                    isOpen={isImageOpen}
-                                    card={selectedCard} />
-                            </>}></Route>
+                            <ImagePopup name="photo"
+                                onClose={closeAllPopups}
+                                isOpen={isImageOpen}
+                                card={selectedCard} />
+                        </>}></Route>
                     </Route>
 
                     <Route path='/signup' element={<>
@@ -237,7 +236,7 @@ function App() {
                         />
                     </>}></Route>
 
-                    <Route path='/signin'> element={<>
+                    <Route path='/signin' element={<>
                         <Login onLogin={handleLogin} />
                         <InfoTooltip
                             name='tooltip'
@@ -246,11 +245,12 @@ function App() {
                             title={message.text}
                             imgPath={message.imgPath}
                         />
-                    </>}</Route>
-                </Routes>
+                    </>}>
+                    </Route>
 
-                <Route path={'*'} element={
-                    <Navigate replace to={loggedIn ? '/' : '/signin'} />} />
+                    <Route path={'*'} element={
+                        <Navigate replace to={loggedIn ? '/' : '/signin'} />} />
+                </Routes>
 
             </CurrentUserContext.Provider>
         </div>
