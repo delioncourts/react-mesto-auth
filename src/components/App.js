@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
 import ImagePopup from './ImagePopup';
@@ -18,8 +19,9 @@ import { register, authorize, getContent } from '../utils/mestoAuth';
 import successLogo from "../images/SuccessLogo.svg"
 import failLogo from "../images/FailLogo.svg";
 
-
 function App() {
+    const navigate = useNavigate();
+
     const [isEditProfilePopupOpen, setOpenEditProfile] = useState(false);
     const [isAddPlacePopupOpen, setOpenAddPlace] = useState(false);
     const [isEditAvatarPopupOpen, setOpenEditAvatar] = useState(false);
@@ -179,16 +181,38 @@ function App() {
         <div className="page">
             <CurrentUserContext.Provider value={currentUser}>
 
-                <Header email={userInfo} signOut={handleSignOut} />
+                <Header
+                    email={userInfo}
+                    signOut={handleSignOut} />
 
-                <Main
-                    cards={cards}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onCardClick={handleCardClick}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete} />
+                <Routes>
+                    <ProtectedRoute
+                        exact path='/'
+                        loggedIn={loggedIn}
+                        component={Main}
+                        cards={cards}
+                        onEditProfile={handleEditProfileClick}
+                        onAddPlace={handleAddPlaceClick}
+                        onEditAvatar={handleEditAvatarClick}
+                        onCardClick={handleCardClick}
+                        onCardLike={handleCardLike}
+                        onCardDelete={handleCardDelete}
+                    />
+                    <Route path='/sign-in'>
+                        <Register
+                            isOpen={isEditProfilePopupOpen}
+                            onRegister={handleRegister}
+                            isInfoTooltipOpen={isInfoTooltipOpen}
+                        />
+                    </Route>
+                    <Route path='/sign-up'>
+                        <Login
+                            isOpen={isEditProfilePopupOpen}
+                            onLogin={handleLogin}
+                        />
+                    </Route>
+                </Routes>
+
                 <Footer />
 
                 <EditProfilePopup
