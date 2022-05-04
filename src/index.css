@@ -61,3 +61,7 @@
 @import url(./blocks/popup/__text/popup__text.css);
 @import url(./blocks/popup/__link/popup__link.css);
 @import url(./blocks/popup/__save/_auth/popup__save_auth.css);
+@import url(./blocks/popup/__wrapper/popup__wrapper.css);
+@import url(./blocks/popup/__container-tooltip/popup__container-tooltip.css);
+@import url(./blocks/popup/__heading-tooltip/popup__heading-tooltip.css);
+@import url(./blocks/popup/__open-tooltip/popup__open-tooltip.css);

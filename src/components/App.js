@@ -71,6 +71,7 @@ function App() {
         setOpenEditProfile(false);
         setOpenAddPlace(false);
         setImageOpen(false);
+        setIsInfoTooltipOpen(false);
     }
 
     function handleCardLike(card) {

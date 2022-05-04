@@ -4,8 +4,8 @@
 	min-height: 33px;
 	margin: 0;
 	padding: 0;
-	padding-top: 45px;
-	padding-bottom: 41px;
+	/*padding-top: 45px;
+	padding-bottom: 41px; */
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {

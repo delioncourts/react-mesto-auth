@@ -29,13 +29,6 @@ function Header({ loggedIn, email, onSignOut }) {
             }
           </>)
       }
-      <>
-        <button onClick={openMenu} className={"burger"}>
-          <span className={`burger__line ${menu && "burger__line_open"}`}></span>
-          <span className={`burger__line ${menu && "burger__line_open"}`}></span>
-          <span className={`burger__line ${menu && "burger__line_open"}`}></span>
-        </button>
-      </>
     </header>
   )
 }

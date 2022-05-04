@@ -9,7 +9,7 @@
 	max-height: 50px;
 	background-color: #000000;
 	margin: 0 auto;
-	margin-top: 56px;
+	/*margin-top: 56px;*/
 	margin-bottom: 29px;
 	width: 100%;
 	min-height: 50px;
@@ -20,14 +20,7 @@
 	.popup__save {
 		font-size: 14px;
 		line-height: 17px;
-		margin-top: 45px;
 		margin-bottom: 25px;
 		min-height: 46px;
 	}
-}
-
-.popup__save:hover {
-	background-color: rgba(0, 0, 0, .8);
-	border-radius: 2px;
-	cursor: pointer;
 }
