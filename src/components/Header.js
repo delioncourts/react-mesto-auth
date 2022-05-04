@@ -1,19 +1,11 @@
 import HeaderInfo from "./HeaderInfo";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from "../images/logo.svg";
 
 function Header({ loggedIn, email, onSignOut }) {
   const location = useLocation();
-  const [menu, setMenu] = useState(false);
 
-  function openMenu() {
-    setMenu(!menu);
-  }
-
-  useEffect(() => {
-    setMenu(false);
-  }, [location])
 
   return (
     <header className="header">
