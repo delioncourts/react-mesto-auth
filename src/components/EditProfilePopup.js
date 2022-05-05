@@ -13,7 +13,7 @@ function EditProfilePopup({ onUpdateUser, isOpen, onClose }) {
     // его данные будут использованы в управляемых компонентах.
     React.useEffect(() => {
         setName(currentUser.name);
-        setDescription(currentUser.description);
+        setDescription(currentUser.about);
     }, [currentUser, isOpen]);
 
     // Обработчик изменения инпута обновляет стейт

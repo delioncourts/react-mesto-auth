@@ -22,11 +22,11 @@ import failLogo from "../images/FailLogo.svg";
 function App() {
     const navigate = useNavigate();
 
-    const [isEditProfilePopupOpen, setOpenEditProfile] = useState(false);
-    const [isAddPlacePopupOpen, setOpenAddPlace] = useState(false);
-    const [isEditAvatarPopupOpen, setOpenEditAvatar] = useState(false);
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState({});
-    const [isImageOpen, setImageOpen] = useState(false);
+    const [isImageOpen, setIsImageOpen] = useState(false);
     const [currentUser, setCurrentUser] = useState({});
     const [cards, setCards] = useState([]);
 
@@ -51,26 +51,26 @@ function App() {
 
     function handleCardClick(card) {
         setSelectedCard(card);
-        setImageOpen(true);
+        setIsImageOpen(true);
     }
 
     function handleEditAvatarClick() {
-        setOpenEditAvatar(true);
+        setIsEditAvatarPopupOpen(true);
     }
 
     function handleEditProfileClick() {
-        setOpenEditProfile(true);
+        setIsEditProfilePopupOpen(true);
     }
 
     function handleAddPlaceClick() {
-        setOpenAddPlace(true);
+        setIsAddPlacePopupOpen(true);
     }
 
     function closeAllPopups() {
-        setOpenEditAvatar(false);
-        setOpenEditProfile(false);
-        setOpenAddPlace(false);
-        setImageOpen(false);
+        setIsEditAvatarPopupOpen(false);
+        setIsEditProfilePopupOpen(false);
+        setIsAddPlacePopupOpen(false);
+        setIsImageOpen(false);
         setIsInfoTooltipOpen(false);
     }
 
