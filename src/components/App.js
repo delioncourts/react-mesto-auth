@@ -33,21 +33,21 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
     const [message, setMessage] = useState(false);
-   // const [email, setEmail] = useState('');
+    // const [email, setEmail] = useState('');
     const [userInfo, setUserInfo] = useState(null);
 
     useEffect(() => {
+        Promise.all([api.getInitialCards(), api.getProfile()])
+            .then(([cards, userInfo]) => {
+                setCurrentUser(userInfo);
+                setCards(cards);
+            })
+            .catch((err) => console.log(err))
+    }, [])
+
+    useEffect(() => {
         handleTokenCheck();
-        if (loggedIn) {
-            navigate('/');
-            Promise.all([api.getInitialCards(), api.getProfile()])
-                .then(([cards, userInfo]) => {
-                    setCurrentUser(userInfo);
-                    setCards(cards);
-                })
-                .catch((err) => console.log(err))
-        }
-    }, [loggedIn])
+    }, [])
 
     function handleCardClick(card) {
         setSelectedCard(card);
@@ -80,10 +80,10 @@ function App() {
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
         api.changeLikeCardStatus(card._id, !isLiked)
-        .then((newCard) => {
-            setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
-        })
-        .catch((error) => console.log(error));
+            .then((newCard) => {
+                setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
+            })
+            .catch((error) => console.log(error));
     }
 
     function handleCardDelete(card) {
@@ -137,8 +137,9 @@ function App() {
             getContent(jwt)
                 .then((res) => {
                     if (res) {
-                        setUserInfo({email: res.data.email})
+                        setUserInfo({ email: res.data.email })
                         setLoggedIn(true);
+                        navigate('/');
                     }
                 })
                 .catch((err) => console.log(err));
