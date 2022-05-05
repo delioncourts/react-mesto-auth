@@ -33,16 +33,16 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
     const [message, setMessage] = useState(false);
-    const [email, setEmail] = useState('');
-    //const [userInfo, setUserInfo] = useState(null);
+   // const [email, setEmail] = useState('');
+    const [userInfo, setUserInfo] = useState(null);
 
     useEffect(() => {
         handleTokenCheck();
         if (loggedIn) {
-            //navigate('/');
+            navigate('/');
             Promise.all([api.getInitialCards(), api.getProfile()])
-                .then(([cards, userData]) => {
-                    setCurrentUser(userData);
+                .then(([cards, userInfo]) => {
+                    setCurrentUser(userInfo);
                     setCards(cards);
                 })
                 .catch((err) => console.log(err))
@@ -79,10 +79,11 @@ function App() {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
-        api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+        api.changeLikeCardStatus(card._id, !isLiked)
+        .then((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c))
-                .catch(error => console.log(error));
-        });
+        })
+        .catch((error) => console.log(error));
     }
 
     function handleCardDelete(card) {
@@ -93,7 +94,7 @@ function App() {
         if (isOwn) {
             api.deleteCard(card._id)
                 .then(() => setCards(state => state.filter(c => c._id !== card._id)))
-                .catch(error => console.log(error));
+                .catch((error) => console.log(error));
         }
     }
 
@@ -105,7 +106,7 @@ function App() {
                 setCurrentUser(res)
                 closeAllPopups();
             })
-            .catch(error => console.log(error));
+            .catch((error) => console.log(error));
     }
 
     // Обработчик обновления аватара
@@ -116,18 +117,18 @@ function App() {
                 setCurrentUser(res)
                 closeAllPopups();
             })
-            .catch(error => console.log(error));
+            .catch((error) => console.log(error));
     }
 
     // Обработчик добавления карточки
     function handleAddPlaceSubmit({ name, link }) {
-        return api
+        api
             .addCard(name, link)
             .then((newCard) => {
                 setCards([newCard, ...cards])
                 closeAllPopups();
             })
-            .catch(error => console.log(error));
+            .catch((error) => console.log(error));
     }
 
     function handleTokenCheck() {
@@ -136,8 +137,8 @@ function App() {
             getContent(jwt)
                 .then((res) => {
                     if (res) {
+                        setUserInfo({email: res.data.email})
                         setLoggedIn(true);
-                        setEmail(res.currentUser.email)
                     }
                 })
                 .catch((err) => console.log(err));
@@ -182,7 +183,7 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
 
                 <Header
-                    email={email}
+                    userEmail={userInfo}
                     signOut={handleSignOut} />
 
                 <Routes>

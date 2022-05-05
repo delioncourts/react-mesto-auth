@@ -1,15 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 
-function Auth({ formName, onSubmit, title, children, buttonText }) {
+function Auth({ name, title, children, onSubmit }) {
     return (
         <div className='auth'>
-            <form className='auth__form' name={formName} noValidate onSubmit={onSubmit} >
-                <h2 className='auth__title'>{title}</h2>
+
+            <h2 className={`auth__title auth__title_for${name}`}>{title}</h2>
+            <form className={`auth__form auth__form_for_${name}`} name={name} onSubmit={onSubmit} >
                 {children}
-                {formName === 'register' &&
-                    <Link className='auth__link' to='/sign-in'>Уже зарегистрированы? Войти</Link>
-                }
             </form>
         </div>
     )
