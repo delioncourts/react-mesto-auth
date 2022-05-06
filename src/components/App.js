@@ -188,7 +188,7 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
 
                 <Header
-                    signOut={handleSignOut}
+                    onSignOut={handleSignOut}
                     userEmail={userInfo}
                 />
 
