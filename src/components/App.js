@@ -37,16 +37,13 @@ function App() {
     const [userInfo, setUserInfo] = useState(null);
 
     useEffect(() => {
+        handleTokenCheck();
         Promise.all([api.getInitialCards(), api.getProfile()])
             .then(([cards, userInfo]) => {
                 setCurrentUser(userInfo);
                 setCards(cards);
             })
             .catch((err) => console.log(err))
-    }, [])
-
-    useEffect(() => {
-        handleTokenCheck();
     }, [])
 
     function handleCardClick(card) {
@@ -131,6 +128,11 @@ function App() {
             .catch((error) => console.log(error));
     }
 
+   /* useEffect(() => {
+       handleTokenCheck()
+    }, []) */
+
+
     function handleTokenCheck() {
         const jwt = localStorage.getItem('jwt');
         if (jwt) {
@@ -176,6 +178,7 @@ function App() {
 
     function handleSignOut() {
         setLoggedIn(false);
+        setUserInfo("");
         localStorage.removeItem('jwt');
         navigate('/sign-in');
     }
@@ -185,7 +188,6 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
 
                 <Header
-                    loggedIn={loggedIn}
                     signOut={handleSignOut}
                     userEmail={userInfo}
                 />
