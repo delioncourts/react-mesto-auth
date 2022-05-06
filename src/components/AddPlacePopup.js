@@ -31,7 +31,7 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose }) {
     return (
         <PopupWithForm name="add-place" title="Новое место" button="Создать"
             isOpen={isOpen}
-            onSubmitForm={handleSubmit}
+            onSubmit={handleSubmit}
             onClose={onClose}>
             <input required type="text" value={name || ''} onChange={handleNameChange} className="popup__input" id="cardtitle"
                 placeholder="Название" minLength="2" maxLength="30" />

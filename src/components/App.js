@@ -112,7 +112,7 @@ function App() {
     // Обработчик обновления аватара
     function handleUpdateAvatar({ avatar }) {
         api
-            .editAvatar(avatar)
+            .changeAvatar(avatar)
             .then((res) => {
                 setCurrentUser(res)
                 closeAllPopups();
@@ -163,9 +163,9 @@ function App() {
         authorize(email, password)
             .then((result) => {
                 if (result) {
-                    navigate('/');
                     localStorage.setItem('jwt', result.token);
                     setLoggedIn(true);
+                    navigate('/');
                 }
             })
             .catch(() => {
@@ -175,8 +175,9 @@ function App() {
     }
 
     function handleSignOut() {
+        setLoggedIn(false);
         localStorage.removeItem('jwt');
-        navigate('/signin');
+        navigate('/sign-in');
     }
 
     return (
@@ -184,8 +185,10 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
 
                 <Header
+                    loggedIn={loggedIn}
+                    signOut={handleSignOut}
                     userEmail={userInfo}
-                    signOut={handleSignOut} />
+                />
 
                 <Routes>
                     <Route element={<ProtectedRoute loggedIn={loggedIn}></ProtectedRoute>}>
@@ -251,8 +254,8 @@ function App() {
                     </>}>
                     </Route>
 
-                    <Route path={'*'} element={
-                        <Navigate replace to={loggedIn ? '/' : '/signin'} />} />
+                    <Route path={'*'} element={<Navigate replace to={loggedIn ? '/' : '/signin'} />} />
+
                 </Routes>
 
             </CurrentUserContext.Provider>

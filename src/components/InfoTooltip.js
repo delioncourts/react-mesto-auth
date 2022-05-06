@@ -1,5 +1,3 @@
-import successLogo from "../images/SuccessLogo.svg"
-import failLogo from "../images/FailLogo.svg";
 import React from "react";
 
 export default function InfoTooltip({ isOpen, onClose, imgPath, title }) {

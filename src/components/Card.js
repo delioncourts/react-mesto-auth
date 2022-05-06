@@ -38,7 +38,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
                 <h2 className="card__title">{card.name}</h2>
                 <div className="card__container">
                     <button onClick={handleLikeClick} className={cardLikeButtonClassName} type="button" aria-label="нравится"></button>
-                    <div className="card__like-count">{card.likes.lenght}</div>
+                    <div className="card__like-count">{card.likes.length}</div>
                 </div>
             </div>
         </li>
