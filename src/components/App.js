@@ -33,7 +33,7 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
     const [message, setMessage] = useState(false);
-    // const [email, setEmail] = useState('');
+    //const [email, setEmail] = useState('');
     const [userInfo, setUserInfo] = useState(null);
 
     useEffect(() => {
@@ -128,11 +128,6 @@ function App() {
             .catch((error) => console.log(error));
     }
 
-   /* useEffect(() => {
-       handleTokenCheck()
-    }, []) */
-
-
     function handleTokenCheck() {
         const jwt = localStorage.getItem('jwt');
         if (jwt) {
@@ -168,6 +163,7 @@ function App() {
                     localStorage.setItem('jwt', result.token);
                     setLoggedIn(true);
                     navigate('/');
+                    setUserInfo(email)
                 }
             })
             .catch(() => {
